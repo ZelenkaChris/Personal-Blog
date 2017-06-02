@@ -1,0 +1,93 @@
+html {
+  position: relative;
+	min-height: 100%;
+}
+
+body {
+	padding-top: 70px;
+	margin-bottom: 200px;
+}
+
+a.list-group-item {
+	color: #555;
+}
+
+.entry_title {
+	font-weight: bold;
+}
+
+.entry_date {
+
+}
+
+.entry_body {
+	margin: 2rem 0;
+}
+
+.side-bar {
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.side-bar-title {
+	margin-bottom: 15px;
+}
+
+.side-bar-ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+.side-bar-li {
+	margin-bottom: 5px;
+}
+
+.my-footer {
+	color: #999;
+	border-top: .05rem solid #e5e5e5;
+	padding: 1.5rem 0px;	
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 8rem;
+	background-color: #f9f9f9;
+	text-align: center;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.italics {
+	font-style: italic;
+}
+
+
+@media (min-width: 768px) {
+	.container-small {
+		width: 500px;
+	}
+	.container-large {
+		width: 970px;
+	} 
+} 
+@media (min-width: 992px) {
+	.container-small {
+		width: 600px;
+	}
+	.container-large {
+		width: 1170px;
+	} 
+} 
+@media (min-width: 1200px) {
+	.container-small {
+		width: 700px;
+	}
+	.container-large {
+		width: 1500px;
+	} 
+}
+
+.container-small, .container-large {
+	max-width: 100%;
+}

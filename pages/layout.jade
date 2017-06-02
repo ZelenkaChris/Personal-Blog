@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+	head
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		// js
+		script(type='text/javascript', src='/js/tether.min.js')
+		script(type='text/javascript', src='/js/jquery.min.js')
+		// css
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/font/css/font-awesome.min.css')
+		block head
+	body
+		nav.fixed-top.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
+			.navbar-header
+				button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
+					span.navbar-toggler-icon
+				h1.navbar-brand.mb-0 Chris Zelenka
+			.collapse.navbar-collapse#navbarNavAltMarkup
+				.navbar-nav
+					a.nav-item.nav-link#home(href='/') Home
+					a.nav-item.nav-link#portfolio(href='/portfolio') Portfolio
+					a.nav-item.nav-link#resume(href='/resume') Resume
+		.container#content_header
+			block content_header
+		
+		.container#content
+			block content
+		
+		footer.my-footer
+			| Powered with Node.js, MySQL, Jade/Pug and Raspberry Pi 3 <br /> 
+			| Created by Chris Zelenka, 2017. <br />
+			a(href='mailto:zelenka.chris@gmail.com') Zelenka.Chris@gmail.com
+		script(type='text/javascript', src='/js/bootstrap.min.js')
+		script(type='text/javascript').
+			$("img").addClass("img-fluid")
+
+	block page_script

@@ -1,0 +1,46 @@
+extends layout
+
+block head
+	title Chris Zelenka's Portfolio
+
+block content_header
+	.jumbotron.text-center
+		h1 Portfolio
+
+block content
+	.list-group
+		a.list-group-item.flex-column.alignitems-start(href='http://www.zelenkachris.com:3001/cs160')
+			.d-flex.w-100.justify-content-between
+				h5.mb-1 Educational Activities Aggregated Search
+			p.mb-1.text-muted Web site created for a Software Engineering class project with a group of 6. Activities were scraped from 4 different webpages using JSoup and compiled into an .sql file. Scraped data are then queried through aggregated search.
+			small.text-muted Utilized MySQL, PHP, Java and bitbucket.
+
+		a.list-group-item.flex-column.alignitems-start(href='http://www.zelenkachris.com:3001/iidx')
+			.d-flex.w-100.justify-content-between
+				h5.mb-1 IIDX Score Tracker
+			p.mb-1.text-muted Personal web application created to keep track of my improved scores over time for a game called 'Beatmania IIDX'. Due to other score tracking sites not showing detailed statistics, it was hard to players to keep track of their improvements.
+			small.text-muted Utilized MySQL, PHP and Python
+
+		a.list-group-item.flex-column.alignitems-start(href='http://www.zelenkachris.com/pages/game/')
+			.d-flex.w-100.justify-content-between
+				h5.mb-1 3D Game
+				small.text-muted Only playable on desktop computers.
+			p.mb-1.text-muted Simple 3D (Shoot-em up style) game I created using Three.js library for a Computer Graphics class.
+			small.text-muted Utilized Three.js and Javascript.
+	
+		a.list-group-item.flex-column.alignitems-start(href='http://www.zelenkachris.com/pages/ASTROv3noSound/')
+			.d-flex.w-100.justify-content-between
+				h5.mb-1 Apollo Mission Simulation
+			p.mb-1.text-muted Simulation of the first Manned flight to the Moon (Apollo 8). This project was presented for an Astrology class.
+			small.text-muted Utilized Three.js and Javascript.
+		
+		a.list-group-item.flex-column.alignitems-start(href='https://github.com/ZelenkaChris/Minesweeper')
+			.d-flex.w-100.justify-content-between
+				h5.mb-1 Android Minesweeper Game
+				small.text-muted Android Version 2.2.x (Froyo)
+			p.mb-1.text-muted Minesweeper application was created to test and experiment with Android frameworks. With a partner, coded the games engine, options for users to change difficulty, and leaderboard system.
+			small.text-muted Utilized Android SDK, Java and Git.
+
+block page_script
+	script(type='text/javascript').
+		$('#portfolio').addClass('active')

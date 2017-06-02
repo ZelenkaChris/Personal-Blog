@@ -1,0 +1,86 @@
+extends layout
+
+block head
+	title Chris Zelenka's Blog
+
+block content_header
+	.jumbotron.text-center
+		h1 Chris Zelenka's Blog
+
+block content
+	.row
+		#entries.col-lg-8
+			- for (var i=0; i<data.length; i++)  {
+			div
+				h2.entry_title #{data[i].title}
+				h4.entry_date #{data[i].entry_date.toLocaleDateString()}
+				p.entry_body !{data[i].body}
+			- if(i != data.length-1) {
+				hr
+			- }
+			- }
+
+		#sidebar.col-lg-3.offset-lg-1
+			
+			#aboutme.bg-faded.side-bar
+				h4.side-bar-title 
+					i.fa.fa-user-circle-o.fa-fw
+					| &nbsp;About
+				p Personal webpage to showcase my projects and host my resume.
+			
+			#navigation.bg-faded.side-bar
+				h4.side-bar-title
+					i.fa.fa-globe.fa-fw
+					| &nbsp;Navigation
+				.list-group
+					a.list-group-item(href='/portfolio')
+						i.fa.fa-wrench.fa-fw
+						| &nbsp;Portfolio
+					a.list-group-item(href='/resume')
+						i.fa.fa-file-text-o.fa-fw
+						| &nbsp;Resume
+
+			#contactme.bg-faded.side-bar
+				h4.side-bar-title 
+					i.fa.fa-address-card-o.fa-fw
+					| &nbsp;Contact me
+				.list-group
+					a.list-group-item(href='mailto:zelenkachris@gmail.com')
+						i.fa.fa-envelope.fa-fw
+						| &nbsp;Email
+					a.list-group-item(href='https://www.linkedin.com/in/zelenkachris/')
+						i.fa.fa-linkedin.fa-fw
+						| &nbsp;Linkedin
+					a.list-group-item(href='https://github.com/zelenkachris')
+						i.fa.fa-github.fa-fw
+						| &nbsp;GitHub
+					a.list-group-item(href='http://iidx.me/chrisz')
+						i.fa.fa-music.fa-fw
+						| &nbsp;IIDX
+	
+	#pagination
+		ul.pagination.justify-content-between
+			- if(prev) {
+				-var pPage = curr-1;
+			li.page-item
+				a.page-link(href='/?page=' + pPage ) << Prev
+			- } else {
+			li.page-item.disabled
+				a.page-link << Prev
+			- }
+			- if(next) {
+				-var nPage = curr+1;
+			li.page-item
+				a.page-link(href='/?page=' + nPage) Next >>
+			- } else {
+			li.page-item.disabled
+				a.page-link Next >>
+			- }
+
+block page_script
+	script(type='text/javascript').
+		$('#home').addClass('active');
+		var a = $('#contactme').find('a');
+		for (var i=0; i<a.length; i++) {
+			a[i].target = '_blank';
+		}
