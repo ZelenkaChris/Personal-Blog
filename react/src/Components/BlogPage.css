@@ -1,0 +1,20 @@
+.bg-faded {
+  background-color: #f7f7f7;
+}
+
+.side-bar {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.side-bar-title{
+  margin-bottom: 15px;
+}
+
+.entry_body img{
+  width: 100%;
+}
+
+.entry_title {
+  font-weight: bold;
+}

@@ -1,0 +1,32 @@
+#resume_border {
+  border-style: solid;
+  padding: 1rem 2rem 0 2rem;
+}
+
+.mb-5 {
+  margin-bottom: 3rem!important;
+}
+
+.mb-4{
+  margin-bottom: 1.5rem!important;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.italics {
+  font-style: italic;
+}
+
+.d-flex {
+  display: flex
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
