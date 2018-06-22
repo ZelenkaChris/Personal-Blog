@@ -18,3 +18,15 @@
 .entry_title {
   font-weight: bold;
 }
+
+#contactme > ul > a {
+  color: black;
+}
+
+#contactme > ul > a:hover {
+  color: grey;
+}
+
+.entry_body {
+  white-space: pre-wrap;
+}

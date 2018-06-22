@@ -1,28 +1,42 @@
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {Collapse, NavbarToggler, NavbarBrand, Navbar, Nav, NavItem, NavLink, Container} from 'reactstrap';
 import React from 'react';
-import createReactClass from 'create-react-class';
+import { NavLink as rrdLink } from 'react-router-dom';
 
-var  MyNavbar = createReactClass({
-  
+export default class MyNavbar extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {isOpen: false};
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   render() {
     return (
-      <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            Chris Zelenka
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav onSelect={this.props.handleTabs}>
-            <NavItem className={(this.props.activeTab === 1) ? "active" : ""} eventKey={1} href="#">Home</NavItem>
-            <NavItem className={(this.props.activeTab === 2) ? "active" : ""} eventKey={2} href="#">Portfolio</NavItem>
-            <NavItem className={(this.props.activeTab === 3) ? "active" : ""} eventKey={3} href="#">Resume</NavItem>
-          </Nav>
-        </Navbar.Collapse>
+      <Navbar color="faded" light expand="md">
+        <Container>
+          <NavbarBrand>Chris Zelenka</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} className="mr-2" />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink tag={ rrdLink } exact to="/">Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink  tag={ rrdLink } to="/portfolio">Portfolio</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink  tag={ rrdLink } to="/resume">Resume</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Container>
       </Navbar>
     )
   }
-});
-
-export default MyNavbar;
+}

@@ -1,4 +1,7 @@
-.panel-heading {
-  font-size: 24px;
-  font-weight: 800;
+.port_links > a {
+  color: black;
+}
+
+.port_links > a:hover {
+  color: grey;
 }

@@ -3,6 +3,7 @@ import MyNavbar from './Components/MyNavbar';
 import ResumePage from './Components/ResumePage';
 import PortfolioPage from './Components/PortfolioPage';
 import BlogPage from './Components/BlogPage';
+import {Switch, Route} from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -22,14 +23,16 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
-        <MyNavbar 
-          handleTabs={this.handleTabs}
-          activeTab={this.state.activeTab} />
-        {this.state.activeTab === 1 && <BlogPage />}
-        {this.state.activeTab === 2 && <PortfolioPage />}
-        {this.state.activeTab === 3 && <ResumePage />}
-      </div>
+        <div className="App">
+          <MyNavbar />
+          <div className="AppContent">
+            <Switch>
+              <Route exact path='/' component={BlogPage}/>
+              <Route exact path='/portfolio' component={PortfolioPage}/>
+              <Route exact path='/resume' component={ResumePage}/>
+            </Switch>
+          </div>
+        </div>
     );
   }
 }
