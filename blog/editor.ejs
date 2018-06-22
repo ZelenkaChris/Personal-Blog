@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+      .labels {
+          margin: 15px 0 15px 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="container">
+      <form>
+        <div class="labels">
+          <label for="title">Title</label>
+          <input name="title">
+        </div>
+        <div class="labels">
+          <label for="entry_date">Date</label>
+          <input name="entry_date" type="date">
+        </div>
+        <div>
+          <label for="post">Blog Post</label>
+          <input name="post" type="hidden">
+          <div id='editor' style='height: 600px;'></div>
+        </div>
+        <div class="labels">
+          <label for="password">Password</label>
+          <input name="password" type="password">
+        </div>
+        <div>
+          <button type='submit'>Submit</button>
+        </div>
+      </form>
+    </div>
+
+
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script   src="https://code.jquery.com/jquery-3.3.1.min.js"
+              integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"></script>
+    <script>
+      $.getJSON( "../../api/entries/<%= _id %>", function(data) {
+        var quill = new Quill('#editor', {
+          theme: 'snow',
+          modules: {
+            toolbar: {
+              container: [['image', 'code-block']],
+              handlers: {
+                image: imageHandler
+              }
+            }
+          }
+        });
+
+        function imageHandler() {
+          var range = this.quill.getSelection();
+          var value = prompt('What is the image URL');
+          this.quill.insertEmbed(range.index, "<img src='" + value + "'>");
+        }
+
+        var form = document.querySelector('form');
+        
+        $("input[name=title]").val(data[0].title);
+        $("input[name=entry_date]").val(data[0].entry_date);
+        quill.insertText(0, data[0].body);
+      
+        form.onsubmit = function() {
+          var about = document.querySelector('input[name=post]');
+          about.value = quill.getText();
+
+          postingData = $(form).serializeArray();
+          postingData.push({name: "id", value: data[0]._id});
+          
+          
+          console.log(postingData);
+          
+          $.post('http://www.zelenkachris.com/blog/editor/' + data[0]._id, {postingData}, function(d) {
+            if(d==='done'){
+              alert("Submitted");
+            } else if(d==='pw'){
+              alert("Wrong Password");
+            }
+          });
+
+          
+          return false;
+        };
+      });
+    </script>
+  </body>
+</html>

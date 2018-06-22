@@ -1,0 +1,37 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <div>
+      <select id="selector" onchange="change()">
+      </select>
+    </div>
+    
+    <div>
+      <iframe id="myframe" style="border: none; width: 100%; height: 100%;"></iframe>
+    </div>
+    
+  </body>
+  
+  
+  <script   src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+  <script>
+    $.getJSON( "../api/entries", function(data) {
+      $.each( data, function( count, datum ) {
+        $("#selector").append($('<option>', {
+          value: datum._id,
+          text: datum.title
+        }));
+      });
+    });
+    
+    function change(){
+      x = document.getElementById("selector").value;
+      document.getElementById("myframe").src = "http://www.zelenkachris.com/blog/editor/" + x;
+    }
+  </script>
+  
+</html>
