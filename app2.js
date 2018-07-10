@@ -3,6 +3,7 @@ const path = require('path');
 var bodyParser = require('body-parser')
 var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
+var getIP = require('ipware')().get_ip;
 
 const pw = '';
 
@@ -10,7 +11,7 @@ var app = express();
 
 app.use('/font', express.static('/home/pi/node_modules/font-awesome'));
 app.use('/files', express.static(__dirname + '/files'));
-app.use('/', express.static(__dirname + '/build'));
+app.use(express.static(path.join(__dirname + '/build')));
 app.use('/blog/images', express.static(__dirname + '/blog/images'));
 
 app.use('/pages', express.static('/var/www/html'));
@@ -23,10 +24,12 @@ app.set('view engine', 'ejs');
 const port = 3000;
 
 app.get('/portfolio', function (req, res) {
+  console.log(getIP(req).clientIp + ": Portfolio");
   res.sendFile(path.join(__dirname, '/build', 'index.html'))
 });
 
 app.get('/resume', function (req, res) {
+  console.log(getIP(req).clientIp + ": Resume");
   res.sendFile(path.join(__dirname, '/build', 'index.html'))
 });
 
@@ -81,6 +84,7 @@ app.post('/blog/editor/:id', function(req, res) {
 
 
 app.get('/api/entries', function(req, res) {
+  console.log(getIP(req).clientIp + ": Home / Blog");
   db.collection("entries").find().sort({"entry_date": -1}).toArray(function(err, docs) {
     res.json(docs);
   });
