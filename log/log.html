@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    <title>zelenkachris visitor log</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <style>
+      #table {
+        width: 800px;
+        float: left;
+        display: inline-block;
+        margin: 20px;
+      }
+      #location {
+        width: 800px;
+        height: 500px;
+        margin: 20px;
+        display: inline-block;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="table">   
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>IP</th>
+            <th>Visit</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+    <div id="location">
+      <h1>
+        Click on an IP address.
+      </h1>
+    </div>
+    
+    
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script 
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+      crossorigin="anonymous"></script>
+    <script 
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+      crossorigin="anonymous"></script>
+    
+    <script>      
+      $.getJSON( "../../api/log", function(data) {        
+        let rows = data.map( (v, i) => {
+          let index = i+1;
+          let d = new Date(v['date']).toLocaleString();
+          return "<tr><td>" + index + "</td><td onclick=getLocation('" + v['ip'] + "')>" + v['ip'] + "</td><td>" + v['visit'] + "</td><td>" + d + "</td></tr>";
+        });
+        if (rows){
+          $(".table").append(rows);
+        }
+      });
+
+      function getLocation(ip) {
+        $.getJSON("http://ip-api.com/json/" + ip, function(data) {
+          let out = data.country + ": " + data.city + ", " + data.region;
+          $("#location > h1").text(out);
+        });        
+      }
+    
+    </script>
+    
+    
+    
+  </body>  
+</html>

@@ -55,6 +55,10 @@ app.get('/blog/edit', function(req, res) {
   res.sendFile(path.join(__dirname, '/blog', 'edit.html'));
 });
 
+app.get('/log', function(req, res) {
+  res.sendFile(path.join(__dirname, '/log', 'log.html'));
+});
+
 app.get('/blog/editor/:id', function(req, res) {
   res.render(__dirname + "/blog/editor", {_id: req.params['id']});
 });
@@ -82,9 +86,28 @@ app.post('/blog/editor/:id', function(req, res) {
   }
 });
 
-
 app.get('/api/entries', function(req, res) {
-  console.log(getIP(req).clientIp + ": Home / Blog");
+  let userIP = getIP(req).clientIp;
+  let re = /192.168.1.*/i
+  
+  
+  if(!userIP.match(re)) {
+    let query = {ip: userIP};
+    let newvalues = {
+                      $inc: {visit: 1}, 
+                      $set: {date: new Date()}
+                    };
+    let options = {upsert: true, safe: false};
+
+    db.collection("log").updateOne(query, newvalues, options, function (err, docs) {
+      if (err) {
+        throw err;
+      } else {
+        console.log(userIP + ": Home / Blog");
+      }
+    });
+
+  }
   db.collection("entries").find().sort({"entry_date": -1}).toArray(function(err, docs) {
     res.json(docs);
   });
@@ -96,6 +119,12 @@ app.get('/api/entries/:id', function(req, res) {
   db.collection("entries").find(query).toArray(function(err, docs) {
     res.json(docs);
   });  
+});
+
+app.get('/api/log', function(req, res) {
+  db.collection("log").find().sort({"date": -1}).toArray(function(err, docs) {
+    res.json(docs);
+  });
 });
 
 MongoClient.connect('mongodb://localhost/blog', function(err, dbConnection) {
